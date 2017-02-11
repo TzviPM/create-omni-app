@@ -39,8 +39,8 @@ function handle_exit {
   exit
 }
 
-function create_react_app {
-  node "$temp_cli_path"/node_modules/create-react-app/index.js $*
+function create_omni_app {
+  node "$temp_cli_path"/node_modules/create-omni-app/index.js $*
 }
 
 # Exit the script with a helpful error message when any error is encountered
@@ -70,7 +70,7 @@ fi
 # ******************************************************************************
 
 # Pack CLI
-cd $root_path/packages/create-react-app
+cd $root_path/packages/create-omni-app
 cli_path=$PWD/`npm pack`
 
 # Install the CLI in a temporary location
@@ -82,31 +82,31 @@ npm install $cli_path
 # ******************************************************************************
 
 cd $temp_app_path
-create_react_app --scripts-version=0.4.0 test-app-version-number
+create_omni_app --scripts-version=0.4.0 test-app-version-number
 cd test-app-version-number
 
 # Check corresponding scripts version is installed.
-test -e node_modules/react-scripts
-grep '"version": "0.4.0"' node_modules/react-scripts/package.json
+test -e node_modules/omni-scripts
+grep '"version": "0.4.0"' node_modules/omni-scripts/package.json
 
 # ******************************************************************************
 # Test --scripts-version with a tarball url
 # ******************************************************************************
 
 cd $temp_app_path
-create_react_app --scripts-version=https://registry.npmjs.org/react-scripts/-/react-scripts-0.4.0.tgz test-app-tarball-url
+create_omni_app --scripts-version=https://registry.npmjs.org/omni-scripts/-/omni-scripts-0.1.0.tgz test-app-tarball-url
 cd test-app-tarball-url
 
 # Check corresponding scripts version is installed.
-test -e node_modules/react-scripts
-grep '"version": "0.4.0"' node_modules/react-scripts/package.json
+test -e node_modules/omni-scripts
+grep '"version": "0.4.0"' node_modules/omni-scripts/package.json
 
 # ******************************************************************************
 # Test --scripts-version with a custom fork of react-scripts
 # ******************************************************************************
 
 cd $temp_app_path
-create_react_app --scripts-version=react-scripts-fork test-app-fork
+create_omni_app --scripts-version=omni-scripts-fork test-app-fork
 cd test-app-fork
 
 # Check corresponding scripts version is installed.
@@ -121,20 +121,20 @@ cd $temp_app_path
 mkdir test-app-nested-paths-t1
 cd test-app-nested-paths-t1
 mkdir -p test-app-nested-paths-t1/aa/bb/cc/dd
-create_react_app test-app-nested-paths-t1/aa/bb/cc/dd
+create_omni_app test-app-nested-paths-t1/aa/bb/cc/dd
 cd test-app-nested-paths-t1/aa/bb/cc/dd
 npm start -- --smoke-test
 
 #Testing a path that does not exist
 cd $temp_app_path
-create_react_app test-app-nested-paths-t2/aa/bb/cc/dd
+create_omni_app test-app-nested-paths-t2/aa/bb/cc/dd
 cd test-app-nested-paths-t2/aa/bb/cc/dd
 npm start -- --smoke-test
 
 #Testing a path that is half exists
 cd $temp_app_path
 mkdir -p test-app-nested-paths-t3/aa
-create_react_app test-app-nested-paths-t3/aa/bb/cc/dd
+create_omni_app test-app-nested-paths-t3/aa/bb/cc/dd
 cd test-app-nested-paths-t3/aa/bb/cc/dd
 npm start -- --smoke-test
 

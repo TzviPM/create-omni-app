@@ -1,11 +1,4 @@
 #!/bin/bash
-# Copyright (c) 2015-present, Facebook, Inc.
-# All rights reserved.
-#
-# This source code is licensed under the BSD-style license found in the
-# LICENSE file in the root directory of this source tree. An additional grant
-# of patent rights can be found in the PATENTS file in the same directory.
-
 # ******************************************************************************
 # This is an end-to-end kitchensink test intended to run on CI.
 # You can also run it locally but it's slow.
@@ -39,7 +32,7 @@ function handle_exit {
   exit
 }
 
-function create_react_app {
+function create_omni_app {
   node "$temp_cli_path"/node_modules/create-react-app/index.js $*
 }
 
@@ -70,11 +63,11 @@ fi
 # ******************************************************************************
 
 # Pack CLI
-cd $root_path/packages/create-react-app
+cd $root_path/packages/create-omni-app
 cli_path=$PWD/`npm pack`
 
 # Go to react-scripts
-cd $root_path/packages/react-scripts
+cd $root_path/packages/omni-scripts
 
 # Save package.json because we're going to touch it
 cp package.json package.json.orig
@@ -84,7 +77,7 @@ cp package.json package.json.orig
 node $root_path/tasks/replace-own-deps.js
 
 # Finally, pack react-scripts
-scripts_path=$root_path/packages/react-scripts/`npm pack`
+scripts_path=$root_path/packages/omni-scripts/`npm pack`
 
 # Restore package.json
 rm package.json
@@ -100,10 +93,10 @@ npm install $cli_path
 
 # Install the app in a temporary location
 cd $temp_app_path
-create_react_app --scripts-version=$scripts_path --internal-testing-template=$root_path/packages/react-scripts/fixtures/kitchensink test-kitchensink
+create_omni_app --scripts-version=$scripts_path --internal-testing-template=$root_path/packages/omni-scripts/fixtures/kitchensink test-kitchensink
 
 # ******************************************************************************
-# Now that we used create-react-app to create an app depending on react-scripts,
+# Now that we used create-omni-app to create an app depending on omni-scripts,
 # let's make sure all npm scripts are in the working state.
 # ******************************************************************************
 
@@ -111,7 +104,7 @@ create_react_app --scripts-version=$scripts_path --internal-testing-template=$ro
 cd test-kitchensink
 
 # Link to our preset
-npm link $root_path/packages/babel-preset-react-app
+npm link $root_path/packages/babel-preset-omni-app
 
 # Test the build
 REACT_APP_SHELL_ENV_MESSAGE=fromtheshell \
@@ -156,16 +149,16 @@ E2E_FILE=./build/index.html \
 # ******************************************************************************
 
 # Unlink our preset
-npm unlink $root_path/packages/babel-preset-react-app
+npm unlink $root_path/packages/babel-preset-omni-app
 
 # Eject...
 echo yes | npm run eject
 
 # ...but still link to the local packages
-npm link $root_path/packages/babel-preset-react-app
-npm link $root_path/packages/eslint-config-react-app
-npm link $root_path/packages/react-dev-utils
-npm link $root_path/packages/react-scripts
+npm link $root_path/packages/babel-preset-omni-app
+npm link $root_path/packages/eslint-config-omni-app
+npm link $root_path/packages/omni-dev-utils
+npm link $root_path/packages/omni-scripts
 
 # ...and we need to remove template's .babelrc
 rm .babelrc

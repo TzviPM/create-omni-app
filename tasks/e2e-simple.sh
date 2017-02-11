@@ -1,11 +1,4 @@
 #!/bin/bash
-# Copyright (c) 2015-present, Facebook, Inc.
-# All rights reserved.
-#
-# This source code is licensed under the BSD-style license found in the
-# LICENSE file in the root directory of this source tree. An additional grant
-# of patent rights can be found in the PATENTS file in the same directory.
-
 # ******************************************************************************
 # This is an end-to-end test intended to run on CI.
 # You can also run it locally but it's slow.
@@ -23,7 +16,7 @@ function cleanup {
   echo 'Cleaning up.'
   cd $root_path
   # Uncomment when snapshot testing is enabled by default:
-  # rm ./packages/react-scripts/template/src/__snapshots__/App.test.js.snap
+  # rm ./packages/omni-scripts/template/src/__snapshots__/App.test.js.snap
   rm -rf $temp_cli_path $temp_app_path
 }
 
@@ -41,8 +34,8 @@ function handle_exit {
   exit
 }
 
-function create_react_app {
-  node "$temp_cli_path"/node_modules/create-react-app/index.js $*
+function create_omni_app {
+  node "$temp_cli_path"/node_modules/create-omni-app/index.js $*
 }
 
 # Exit the script with a helpful error message when any error is encountered
@@ -64,7 +57,7 @@ npm install
 if [ `node --version | sed -e 's/^v//' -e 's/\..\+//g'` -lt 4 ]
 then
   cd $temp_app_path
-  err_output=`node "$root_path"/packages/create-react-app/index.js test-node-version 2>&1 > /dev/null || echo ''`
+  err_output=`node "$root_path"/packages/create-omni-app/index.js test-node-version 2>&1 > /dev/null || echo ''`
   [[ $err_output =~ You\ are\ running\ Node ]] && exit 0 || exit 1
 fi
 
@@ -79,7 +72,7 @@ fi
 ./node_modules/.bin/eslint --ignore-path .gitignore ./
 
 # ******************************************************************************
-# First, test the create-react-app development environment.
+# First, test the create-omni-app development environment.
 # This does not affect our users but makes sure we can develop it.
 # ******************************************************************************
 
@@ -101,15 +94,15 @@ CI=true npm test
 npm start -- --smoke-test
 
 # ******************************************************************************
-# Next, pack react-scripts and create-react-app so we can verify they work.
+# Next, pack omni-scripts and create-omni-app so we can verify they work.
 # ******************************************************************************
 
 # Pack CLI
-cd $root_path/packages/create-react-app
+cd $root_path/packages/create-omni-app
 cli_path=$PWD/`npm pack`
 
-# Go to react-scripts
-cd $root_path/packages/react-scripts
+# Go to omni-scripts
+cd $root_path/packages/omni-scripts
 
 # Save package.json because we're going to touch it
 cp package.json package.json.orig
@@ -118,8 +111,8 @@ cp package.json package.json.orig
 # of those packages.
 node $root_path/tasks/replace-own-deps.js
 
-# Finally, pack react-scripts
-scripts_path=$root_path/packages/react-scripts/`npm pack`
+# Finally, pack omni-scripts
+scripts_path=$root_path/packages/omni-scripts/`npm pack`
 
 # Restore package.json
 rm package.json
@@ -135,10 +128,10 @@ npm install $cli_path
 
 # Install the app in a temporary location
 cd $temp_app_path
-create_react_app --scripts-version=$scripts_path test-app
+create_omni_app --scripts-version=$scripts_path test-app
 
 # ******************************************************************************
-# Now that we used create-react-app to create an app depending on react-scripts,
+# Now that we used create-omni-app to create an app depending on omni-scripts,
 # let's make sure all npm scripts are in the working state.
 # ******************************************************************************
 
@@ -222,10 +215,10 @@ verify_env_url
 echo yes | npm run eject
 
 # ...but still link to the local packages
-npm link $root_path/packages/babel-preset-react-app
-npm link $root_path/packages/eslint-config-react-app
-npm link $root_path/packages/react-dev-utils
-npm link $root_path/packages/react-scripts
+npm link $root_path/packages/babel-preset-omni-app
+npm link $root_path/packages/eslint-config-omni-app
+npm link $root_path/packages/omni-dev-utils
+npm link $root_path/packages/omni-scripts
 
 # Test the build
 npm run build

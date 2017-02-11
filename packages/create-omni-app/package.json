@@ -1,23 +1,23 @@
 {
-  "name": "create-react-app",
-  "version": "1.0.4",
+  "name": "create-omni-app",
+  "version": "0.1.0",
   "keywords": [
-    "react"
+    "omni"
   ],
-  "description": "Create React apps with no build configuration.",
-  "repository": "facebookincubator/create-react-app",
+  "description": "Create Omni apps with no build configuration.",
+  "repository": "Omniroot/create-react-app",
   "license": "BSD-3-Clause",
   "engines": {
     "node": ">=4"
   },
   "bugs": {
-    "url": "https://github.com/facebookincubator/create-react-app/issues"
+    "url": "https://github.com/Omniroot/create-omni-app/issues"
   },
   "files": [
     "index.js"
   ],
   "bin": {
-    "create-react-app": "./index.js"
+    "create-omni-app": "./index.js"
   },
   "dependencies": {
     "chalk": "^1.1.1",
