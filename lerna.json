@@ -1,4 +1,12 @@
 {
+  "changelog": {
+    "repo": "Omniroot/create-omni-app",
+    "labels": {
+      "bug": "Bug Fix",
+      "cleanup": "Housekeeping"
+    },
+    "cacheDir": ".changelog"
+  },
   "lerna": "2.0.0-beta.37",
   "packages": [
     "packages/*"
