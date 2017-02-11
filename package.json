@@ -1,5 +1,4 @@
 {
-  "private": true,
   "scripts": {
     "build": "node packages/react-scripts/scripts/build.js",
     "changelog": "lerna-changelog",
@@ -18,7 +17,14 @@
     "eslint-plugin-import": "1.12.0",
     "eslint-plugin-jsx-a11y": "2.2.2",
     "eslint-plugin-react": "6.3.0",
-    "lerna": "^2.0.0-beta.37",
+    "lerna": "2.0.0-beta.37",
     "lerna-changelog": "^0.2.3"
-  }
+  },
+  "name": "create-omni-app",
+  "version": "0.1.0",
+  "description": "Create Omni apps with no build configuration",
+  "main": "index.js",
+  "repository": "https://github.com/Omniroot/create-omni-app.git",
+  "author": "Tzvi Melamed",
+  "license": "MIT"
 }
