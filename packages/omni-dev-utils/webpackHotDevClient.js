@@ -1,12 +1,3 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
 // This alternative WebpackDevServer combines the functionality of:
 // https://github.com/webpack/webpack-dev-server/blob/webpack-1/client/index.js
 // https://github.com/webpack/webpack/blob/webpack-1/hot/dev-server.js
@@ -41,7 +32,7 @@ ansiHTML.setColors(colors);
 
 function createOverlayIframe(onIframeLoad) {
   var iframe = document.createElement('iframe');
-  iframe.id = 'react-dev-utils-webpack-hot-dev-client-overlay';
+  iframe.id = 'omni-dev-utils-webpack-hot-dev-client-overlay';
   iframe.src = 'about:blank';
   iframe.style.position = 'fixed';
   iframe.style.left = 0;
@@ -58,7 +49,7 @@ function createOverlayIframe(onIframeLoad) {
 
 function addOverlayDivTo(iframe) {
   var div =  iframe.contentDocument.createElement('div');
-  div.id = 'react-dev-utils-webpack-hot-dev-client-overlay-div';
+  div.id = 'omni-dev-utils-webpack-hot-dev-client-overlay-div';
   div.style.position = 'fixed';
   div.style.boxSizing = 'border-box';
   div.style.left = 0;
@@ -123,7 +114,7 @@ function showErrorOverlay(message) {
   });
 }
 
-function destroyErrorOverlay() {  
+function destroyErrorOverlay() {
   if (!overlayDiv) {
     // It is not there in the first place.
     return;

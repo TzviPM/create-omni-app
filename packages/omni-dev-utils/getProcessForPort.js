@@ -11,8 +11,8 @@ var execOptions = {
   ]
 };
 
-function isProcessAReactApp(processCommand) {
-  return /^node .*react-scripts\/scripts\/start\.js\s?$/.test(processCommand);
+function isProcessAnOmniApp(processCommand) {
+  return /^node .*omni-scripts\/scripts\/start\.js\s?$/.test(processCommand);
 }
 
 function getProcessIdOnPort(port) {
@@ -33,7 +33,7 @@ function getPackageNameInDirectory(directory) {
 function getProcessCommand(processId, processDirectory) {
   var command = execSync('ps -o command -p ' + processId + ' | sed -n 2p', execOptions);
 
-  if (isProcessAReactApp(command)) {
+  if (isProcessAnOmniApp(command)) {
     const packageName = getPackageNameInDirectory(processDirectory);
     return (packageName) ? packageName + '\n' : command;
   } else {
@@ -58,4 +58,3 @@ function getProcessForPort(port) {
 }
 
 module.exports = getProcessForPort;
-

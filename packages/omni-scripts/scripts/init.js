@@ -1,12 +1,3 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
 var fs = require('fs-extra');
 var path = require('path');
 var spawn = require('cross-spawn');
@@ -24,10 +15,10 @@ module.exports = function(appPath, appName, verbose, originalDirectory, template
 
   // Setup the script rules
   appPackage.scripts = {
-    'start': 'react-scripts start',
-    'build': 'react-scripts build',
-    'test': 'react-scripts test --env=jsdom',
-    'eject': 'react-scripts eject'
+    'start': 'omni-scripts start',
+    'build': 'omni-scripts build',
+    'test': 'omni-scripts test --env=jsdom',
+    'eject': 'omni-scripts eject'
   };
 
   fs.writeFileSync(

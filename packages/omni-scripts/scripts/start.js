@@ -1,14 +1,3 @@
-// @remove-on-eject-begin
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-// @remove-on-eject-end
-
 process.env.NODE_ENV = 'development';
 
 // Load environment variables from .env file. Suppress warnings using silent
@@ -23,12 +12,12 @@ var WebpackDevServer = require('webpack-dev-server');
 var historyApiFallback = require('connect-history-api-fallback');
 var httpProxyMiddleware = require('http-proxy-middleware');
 var detect = require('detect-port');
-var clearConsole = require('react-dev-utils/clearConsole');
-var checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-var formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-var getProcessForPort = require('react-dev-utils/getProcessForPort');
-var openBrowser = require('react-dev-utils/openBrowser');
-var prompt = require('react-dev-utils/prompt');
+var clearConsole = require('omni-dev-utils/clearConsole');
+var checkRequiredFiles = require('omni-dev-utils/checkRequiredFiles');
+var formatWebpackMessages = require('omni-dev-utils/formatWebpackMessages');
+var getProcessForPort = require('omni-dev-utils/getProcessForPort');
+var openBrowser = require('omni-dev-utils/openBrowser');
+var prompt = require('omni-dev-utils/prompt');
 var fs = require('fs');
 var config = require('../config/webpack.config.dev');
 var paths = require('../config/paths');
@@ -48,7 +37,7 @@ var compiler;
 var handleCompile;
 
 // You can safely remove this after ejecting.
-// We only use this block for testing of Create React App itself:
+// We only use this block for testing of Create Omni App itself:
 var isSmokeTest = process.argv.some(arg => arg.indexOf('--smoke-test') > -1);
 if (isSmokeTest) {
   handleCompile = function (err, stats) {

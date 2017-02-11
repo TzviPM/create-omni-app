@@ -1,17 +1,8 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
 var createJestConfig = require('../utils/createJestConfig');
 var fs = require('fs-extra');
 var path = require('path');
 var paths = require('../config/paths');
-var prompt = require('react-dev-utils/prompt');
+var prompt = require('omni-dev-utils/prompt');
 var spawnSync = require('cross-spawn').sync;
 var chalk = require('chalk');
 var green = chalk.green;
@@ -115,10 +106,10 @@ prompt(
   delete appPackage.scripts['eject'];
   Object.keys(appPackage.scripts).forEach(function (key) {
     appPackage.scripts[key] = appPackage.scripts[key]
-      .replace(/react-scripts (\w+)/g, 'node scripts/$1.js');
+      .replace(/omni-scripts (\w+)/g, 'node scripts/$1.js');
     console.log(
       '  Replacing ' +
-      cyan('"react-scripts ' + key + '"') +
+      cyan('"omni-scripts ' + key + '"') +
       ' with ' +
       cyan('"node scripts/' + key + '.js"')
     );

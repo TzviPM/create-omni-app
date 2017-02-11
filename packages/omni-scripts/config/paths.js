@@ -1,14 +1,3 @@
-// @remove-on-eject-begin
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-// @remove-on-eject-end
-
 var path = require('path');
 var fs = require('fs');
 var url = require('url');
@@ -94,7 +83,7 @@ function resolveOwn(relativePath) {
   return path.resolve(__dirname, relativePath);
 }
 
-// config before eject: we're in ./node_modules/react-scripts/config/
+// config before eject: we're in ./node_modules/omni-scripts/config/
 module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
@@ -112,8 +101,8 @@ module.exports = {
   servedPath: getServedPath(resolveApp('package.json'))
 };
 
-// config before publish: we're in ./packages/react-scripts/config/
-if (__dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1) {
+// config before publish: we're in ./packages/omni-scripts/config/
+if (__dirname.indexOf(path.join('packages', 'omni-scripts', 'config')) !== -1) {
   module.exports = {
     appBuild: resolveOwn('../../../build'),
     appPublic: resolveOwn('../template/public'),
